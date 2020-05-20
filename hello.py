@@ -21,7 +21,7 @@ class Kiwoom_sample(QMainWindow):
         btn_login.clicked.connect(self.login_btn_click)
 
         self.setWindowTitle("Kiwoom sample")
-        self.setGeometry(300, 300, 380, 200)
+        self.setGeometry(300, 300, 380, 350)
 
         label = QLabel('종목코드')
         label.move(20, 20)
@@ -35,8 +35,29 @@ class Kiwoom_sample(QMainWindow):
         btn_search_code.clicked.connect(self.search_btn_click)
 
         self.text_edit = QTextEdit(self)
-        self.text_edit.setGeometry(10, 60, 350, 120)
-        self.text_edit.setEnabled(False)
+        self.text_edit.setGeometry(10, 160, 350, 120)
+        # self.text_edit.setEnabled(False)
+
+        btn_get_account = QPushButton("계좌조회", self)
+        btn_get_account.move(10, 60)
+        btn_get_account.clicked.connect(self.get_account)
+
+        btn_get_all_list = QPushButton("종목가져오기", self)
+        btn_get_all_list.move(120, 60)
+        btn_get_all_list.clicked.connect(self.get_list)
+
+    def get_list(self):
+        ret = self.kiwoom.dynamicCall("GetCodeListByMarket(QString)", ["0"])
+        kospi_code_list = ret.split(';')
+        kospi_code_name_list = []
+
+        for kospi_code in kospi_code_list:
+            name = self.kiwoom.dynamicCall("GetMasterCodeName(QString)", [kospi_code])
+            self.text_edit.append(kospi_code + " : " + name)
+
+    def get_account(self):
+        account_num = self.kiwoom.dynamicCall("GetLoginInfo(QString)", ["ACCNO"])
+        self.text_edit.append("계좌번호 : " + account_num)
 
     def login_btn_click(self):
         self.kiwoom.dynamicCall("CommConnect()")
