@@ -22,6 +22,10 @@ import telegram
 # print(keywords)
 # print(keywords2)
 
+#티몬 페이코 상품권(매달 바뀌는걸지도..)
+#http://www.tmon.co.kr/deal/3665422650(6월)
+#http://www.tmon.co.kr/deal/3580303486(5월)
+
 telegram_token = '1206664250:AAFiDuoarJacXgn5NNZ_5N8Q9YyFv0sE5vE'
 bot = telegram.Bot(token=telegram_token)
 #8427228

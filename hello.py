@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtGui import *
+from pandas import Series, DataFrame
 
 
 class Kiwoom_sample(QMainWindow):
@@ -92,8 +93,32 @@ class Kiwoom_sample(QMainWindow):
             self.text_edit.append("근재야 오늘도 수고했다!")
 
 
+def pandas_test():
+    me = Series([10, 20, 30], index=['kt', 'naver', 'kakao'])
+    you = Series([20, 30, 10], index=['kakao', 'naver', 'kt'])
+    we = me + you
+    print(we)
+
+
+def data_frame_test():
+    row_data = {'col1': [1, 2, 3, 4],
+                'col2': [10, 20, 30, 40],
+                'col3': [100, 200, 300, 400]}
+    data = DataFrame(row_data)
+    print(row_data)
+    print(data)
+
+
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    Kiwoom_sample = Kiwoom_sample()
-    Kiwoom_sample.show()
-    app.exec_()
+    row_data = {'col1': [1, 2, 3, 4],
+                'col2': [10, 20, 30, 40],
+                'col3': [100, 200, 300, 400]}
+    data = DataFrame(row_data)
+    print(row_data)
+    print(data)
+    # data_frame_test()
+    # pandas_test()
+    # app = QApplication(sys.argv)
+    # Kiwoom_sample = Kiwoom_sample()
+    # Kiwoom_sample.show()
+    # app.exec_()
